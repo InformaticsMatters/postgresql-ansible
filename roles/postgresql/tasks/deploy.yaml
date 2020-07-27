@@ -10,12 +10,6 @@
   - role-im-psp-unrestricted
   - rolebinding-pg-sa
 
-- name: Relax {{ pg_namespace }} 'default' service account (for cert-manager)
-  k8s:
-    definition: "{{ lookup('template', 'rolebinding-default-sa.yaml.j2') }}"
-    wait: yes
-  when: cm_state|string == 'present'
-
 # Secrets (database) ----------------------------------------------------------
 
 - name: Check database (postgres) secrets
