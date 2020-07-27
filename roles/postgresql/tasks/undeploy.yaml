@@ -2,7 +2,7 @@
 
 # Go...
 
-- name: Deleting namespace '{{ infra_namespace }}'
+- name: Deleting namespace '{{ pg_namespace }}'
   k8s:
     state: absent
     definition: "{{ lookup('template', 'namespace.yaml.j2') }}"
