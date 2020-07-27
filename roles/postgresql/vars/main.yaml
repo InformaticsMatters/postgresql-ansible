@@ -16,11 +16,6 @@ bind_timeout: 60
 # For AWX the minimum version is 9.6+
 pg_version: '12.2'
 
-# Postgres superuser details
-pg_user: governor
-pg_user_password: "{{ lookup('password', '/dev/null length=12 chars=ascii_letters,digits') }}"
-pg_database: governor
-
 # CPU and Memory requests and limits
 pg_cpu_request: 250m
 pg_cpu_limit: 1000m

@@ -16,9 +16,4 @@ pg_vol_storageclass: " "
 # Root-user variables
 pg_user: postgres
 pg_user_password: "{{ lookup('password', '/dev/null length=8 chars=ascii_letters,digits') }}"
-
-# A built-in (non-root)
-# user and database.
-pg_builtin_user: SetMe
-pg_builtin_user_password: SetMe
-pg_builtin_database_fact: SetMe
+pg_database: postgres
