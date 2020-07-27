@@ -1,5 +1,8 @@
 ---
 
+# A request for the node type to deploy to.
+pg_node_purpose: application
+
 # General timeout,
 # typically used within the k8s module for wait durations.
 # One of the most time-consuming containers to start is Keycloak,
