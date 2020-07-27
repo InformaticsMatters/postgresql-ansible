@@ -110,7 +110,7 @@ spec:
         - name: POSTGRES_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: im-postgres
+              name: postgres
               key: database_admin_user_password
         # The default database that is created
         # when the image is first started
