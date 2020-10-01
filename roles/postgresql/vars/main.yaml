@@ -1,8 +1,5 @@
 ---
 
-# A request for the node type to deploy to.
-pg_node_purpose: application
-
 # General timeout,
 # typically used within the k8s module for wait durations.
 # One of the most time-consuming containers to start is Keycloak,
@@ -20,6 +17,6 @@ pg_version: '12.2'
 
 # CPU and Memory requests and limits
 pg_cpu_request: 250m
-pg_cpu_limit: 1000m
+pg_cpu_limit: 500m
 pg_mem_request: 100Mi
 pg_mem_limit: 500Mi
