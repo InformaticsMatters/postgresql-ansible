@@ -3,6 +3,8 @@
 [![Build Status](https://travis-ci.com/InformaticsMatters/postgresql-ansible.svg?branch=master)](https://travis-ci.com/InformaticsMatters/postgresql-ansible)
 ![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/informaticsmatters/postgresql-ansible)
 
+[![CodeFactor](https://www.codefactor.io/repository/github/informaticsmatters/postgresql-ansible/badge)](https://www.codefactor.io/repository/github/informaticsmatters/postgresql-ansible)
+
 A playbook and Role to deploy PosgreSQL, suitable for execution by
 [AWX].
 
