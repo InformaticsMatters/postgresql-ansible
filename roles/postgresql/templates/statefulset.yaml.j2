@@ -85,7 +85,12 @@ spec:
           readOnly: true
         # Persistent volume for data
         - mountPath: /var/lib/postgresql/data
-          name: postgres-pvc
+          name: pg-pvc
+{% if pg_copy_vol_size_g %}
+        # Persistent volume for pgcopy data
+        - mountPath: /pgcopy
+          name: pgcopy-pvc
+{% endif %}
         env:
         # PGDATA - the location of persisted database files.
         # Normally a sub-directory of '/var/lib/postgresql/data'.
@@ -122,6 +127,11 @@ spec:
       - name: postgres-conf
         configMap:
           name: postgres-conf
-      - name: postgres-pvc
+      - name: pg-pvc
         persistentVolumeClaim:
           claimName: pg
+{% if pg_copy_vol_size_g %}
+      - name: pgcopy-pvc
+        persistentVolumeClaim:
+          claimName: pgcopy
+{% endif %}

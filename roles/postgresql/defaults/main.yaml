@@ -10,8 +10,20 @@ pg_namespace: postgres
 # The database volume size (Gi).
 pg_vol_size_g: 50
 # The StorageClass of the postgres persistent volume.
-# An blank class implied the cluster default.
+# A blank class implied the cluster default.
 pg_vol_storageclass: " "
+
+# The volume size (Gi) of a separate 'pgcopy' volume.
+# The volume is mounted into the database container
+# at '/pgcopy'. If the volume size defined here is '0'
+# no pg-copy volume is created.
+#
+# You might create a pg-copy volume to provide an shared EFS/NFS volume
+# for copy operations (typically used in our fragmentor).
+pg_copy_vol_size_g: 0
+# The StorageClass of the persistent volume.
+# A blank class implied the cluster default.
+pg_copy_vol_storageclass: " "
 
 # Root-user variables
 pg_user: postgres

@@ -7,4 +7,3 @@ install:
 script:
 - yamllint .
 - find . -type f -iname '*.j2' -exec yamllint {} \;
-- ansible-lint

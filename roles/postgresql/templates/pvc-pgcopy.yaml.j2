@@ -1,0 +1,13 @@
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: pgcopy
+  namespace: {{ pg_namespace }}
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: '{{ pg_copy_vol_storageclass }}'
+  resources:
+    requests:
+      storage: '{{ pg_copy_vol_size_g }}Gi'
