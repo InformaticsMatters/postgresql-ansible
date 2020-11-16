@@ -1,0 +1,26 @@
+---
+
+# An example parameter file that can safely be renamed 'parameters.yaml'
+# (which is excluded by the gitignore), and used like this: -
+#
+#   ansible-playbook site.yaml -e @parameters.yaml
+#
+# You will, of course, need to supply our AWX-like Kubernetes
+# environment variables that are suitable for your cluster: -
+#
+#   export K8S_AUTH_HOST=https://example.com
+#   export K8S_AUTH_API_KEY=1234
+#   export K8S_AUTH_VERIFY_SSL=no
+
+pg_state: present
+pg_version: '12.3-alpine'
+
+pg_namespace: fragmentor
+pg_vol_size_g: 1
+pg_vol_storageclass: gp2
+pg_copy_vol_size_g: 1
+pg_copy_vol_storageclass: efs
+
+pg_user: postgres
+pg_user_password: blob1234
+pg_database: frag

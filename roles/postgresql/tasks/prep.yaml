@@ -12,8 +12,18 @@
 - name: Install prerequisite Python modules
   pip:
     name:
-    - jmespath==0.9.4
     extra_args: --user
+
+# Expose all the installed Python modules...
+
+- name: Capture pip freeze
+  command: pip freeze
+  register: freeze
+  changed_when: false
+
+- name: Display pip freeze
+  debug:
+    var: freeze.stdout_lines
 
 # Kubernetes credentials ------------------------------------------------------
 
