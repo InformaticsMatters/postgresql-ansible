@@ -6,7 +6,7 @@ metadata:
   namespace: {{ pg_namespace }}
 spec:
   accessModes:
-  - ReadWriteOnce
+  - ReadWriteMany
   storageClassName: '{{ pg_copy_vol_storageclass }}'
   resources:
     requests:
