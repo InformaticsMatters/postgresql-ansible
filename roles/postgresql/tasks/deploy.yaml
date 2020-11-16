@@ -1,5 +1,16 @@
 ---
 
+# Sanity-checks
+
+- name: Assert control variables (aux user)
+  assert:
+    that:
+    - pg_aux_user_password|string|length > 0
+    - pg_aux_database|string|length > 0
+  when: pg_aux_user|string|length > 0
+
+# Create namespace
+
 - name: Creating namespace '{{ pg_namespace }}'
   k8s:
     definition: "{{ lookup('template', '{{ item }}.yaml.j2') }}"
@@ -25,6 +36,9 @@
     pg_user_fact: "{{ pg_user }}"
     pg_user_password_fact: "{{ pg_user_password }}"
     pg_database_fact: "{{ pg_database }}"
+    pg_aux_user_fact: "{{ pg_aux_user }}"
+    pg_aux_user_password_fact: "{{ pg_aux_user_password }}"
+    pg_aux_database_fact: "{{ pg_aux_database }}"
   when: pg_s_result.resources|length == 0
 
 - name: Set database secret facts (pre-deployed secrets)
@@ -32,6 +46,9 @@
     pg_user_fact: "{{ pg_s_result.resources[0].data.database_admin_user|b64decode }}"
     pg_user_password_fact: "{{ pg_s_result.resources[0].data.database_admin_user_password|b64decode }}"
     pg_database_fact: "{{ pg_s_result.resources[0].data.database_name|b64decode }}"
+    pg_aux_user_fact: "{{ pg_s_result.resources[0].data.database_aux_user }}"
+    pg_aux_user_password_fact: "{{ pg_s_result.resources[0].data.database_aux_user_password }}"
+    pg_aux_database_fact: "{{ pg_s_result.resources[0].data.database_aux_database }}"
   when: pg_s_result.resources|length == 1
 
 - name: Write Database secrets
@@ -125,6 +142,15 @@
     when: wait_for_bind|bool
 
   when: pg_copy_vol_size_g|int > 0
+
+# Database init (if there's an aux user) --------------------------------------
+
+- name: Postgres init
+  k8s:
+    definition: "{{ lookup('template', 'configmap-postgres-init.yaml.j2') }}"
+    wait: yes
+    wait_timeout: "{{ wait_timeout }}"
+  when: pg_aux_user_fact|string|length > 0
 
 # Database (postgres) ---------------------------------------------------------
 

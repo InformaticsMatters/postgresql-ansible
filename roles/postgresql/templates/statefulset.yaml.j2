@@ -78,6 +78,14 @@ spec:
             - "-c"
             - pg_isready -h 127.0.0.1 -p 5432 -U {{ pg_user }} -q
         volumeMounts:
+{% if pg_aux_user_fact %}
+        # Database initialisation scripts
+        # It's here we create additional - 'out-of-the-box' users and databases
+        - mountPath: /docker-entrypoint-initdb.d/01-init.sh
+          name: postgres-init
+          subPath: 01-init.sh
+          readOnly: true
+{% endif %}
         # Postgres configuration
         - mountPath: /etc/postgresql/postgresql.conf
           name: postgres-conf
@@ -134,4 +142,9 @@ spec:
       - name: pgcopy-pvc
         persistentVolumeClaim:
           claimName: pgcopy
+{% endif %}
+{% if pg_aux_user_fact %}
+      - name: postgres-init
+        configMap:
+          name: postgres-init
 {% endif %}

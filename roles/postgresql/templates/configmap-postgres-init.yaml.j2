@@ -1,0 +1,17 @@
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: postgres-init
+  namespace: {{ pg_namespace }}
+data:
+  01-init.sh: |
+    #!/bin/bash
+    set -e
+    psql -v ON_ERROR_STOP=1 --username "{{ pg_user_fact }}" --dbname "{{ pg_database_fact }}" <<-EOSQL
+        -- Configure a user and database for the additional (auxiliary) user
+        CREATE USER {{ pg_aux_user_fact }};
+        ALTER USER {{ pg_aux_user_fact }} WITH PASSWORD '{{ pg_aux_user_password_fact }}';
+        CREATE DATABASE {{ pg_aux_database_fact }};
+        GRANT ALL PRIVILEGES ON DATABASE {{ pg_aux_database_fact }} TO {{ pg_aux_user_fact }};
+    EOSQL

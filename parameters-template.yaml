@@ -21,6 +21,6 @@ pg_vol_storageclass: gp2
 pg_copy_vol_size_g: 1
 pg_copy_vol_storageclass: efs
 
-pg_user: postgres
-pg_user_password: blob1234
-pg_database: frag
+pg_aux_user: frag
+pg_aux_user_password: blob1234
+pg_aux_database: frag
