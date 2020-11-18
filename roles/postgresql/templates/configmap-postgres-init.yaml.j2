@@ -14,4 +14,7 @@ data:
         ALTER USER {{ pg_aux_user_fact }} WITH PASSWORD '{{ pg_aux_user_password_fact }}';
         CREATE DATABASE {{ pg_aux_database_fact }};
         GRANT ALL PRIVILEGES ON DATABASE {{ pg_aux_database_fact }} TO {{ pg_aux_user_fact }};
+{% if pg_aux_user_is_superuser %}
+        ALTER USER {{ pg_aux_user_fact }} WITH SUPERUSER;
+{% endif %}
     EOSQL

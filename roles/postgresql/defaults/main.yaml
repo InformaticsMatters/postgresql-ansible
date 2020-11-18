@@ -34,6 +34,9 @@ pg_database: postgres
 # If you set a user, set a password and database.
 # If set an 'init' configmap is written to the DB container
 # that is used to create the user and database.
+# If pg_aux_user_is_superuser then the user is given SUPERUSER
+# rights in the DB.
 pg_aux_user: ''
 pg_aux_user_password: ''
 pg_aux_database: ''
+pg_aux_user_is_superuser: yes
