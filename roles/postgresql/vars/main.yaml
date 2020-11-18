@@ -13,7 +13,9 @@ wait_for_bind: no
 bind_timeout: 60
 
 # The database version.
-pg_version: '12.2'
+pg_image_registry: docker.io
+pg_image_name: postgres
+pg_image_version: '12.2'
 
 # CPU and Memory requests and limits
 pg_cpu_request: 250m

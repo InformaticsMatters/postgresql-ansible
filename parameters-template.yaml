@@ -13,7 +13,6 @@
 #   export K8S_AUTH_VERIFY_SSL=no
 
 pg_state: present
-pg_version: '12.3-alpine'
 
 pg_namespace: fragmentor
 pg_vol_size_g: 1

@@ -39,7 +39,7 @@ spec:
 
       containers:
       - name: postgres
-        image: postgres:{{ pg_version }}
+        image: {{ pg_image_registry }}/{{ pg_image_name }}:{{ pg_image_version }}
         imagePullPolicy: IfNotPresent
         terminationMessagePolicy: FallbackToLogsOnError
         ports:
