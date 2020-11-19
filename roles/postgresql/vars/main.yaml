@@ -16,6 +16,10 @@ bind_timeout: 60
 pg_image_registry: docker.io
 pg_image_name: postgres
 pg_image_version: '12.2'
+# A pull-secret name.
+# If you need a pull secret to pull the image you must create it
+# in the chosen namespace and provide the name of it in this variable.
+all_image_preset_pullsecret_name: ''
 
 # CPU and Memory requests and limits
 pg_cpu_request: 250m

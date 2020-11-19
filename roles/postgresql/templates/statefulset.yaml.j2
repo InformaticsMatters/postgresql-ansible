@@ -29,6 +29,11 @@ spec:
                 values:
                 - core
 
+{% if all_image_preset_pullsecret_name|string|length > 0 %}
+      imagePullSecrets:
+      - name: {{ all_image_preset_pullsecret_name }}
+{% endif %}
+
       # To access the mounted database volume
       # we set the security context's fsGroup
       # to the group that will be using the volume
