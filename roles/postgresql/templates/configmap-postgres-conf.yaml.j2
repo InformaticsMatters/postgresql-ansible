@@ -6,7 +6,5 @@ metadata:
   namespace: {{ pg_namespace }}
 data:
   postgresql.conf: |
-    #--------------------------------------------------------------------------
-    # CONNECTIONS AND AUTHENTICATION
-    #--------------------------------------------------------------------------
     listen_addresses = '*'
+    include_if_exists 'extra.conf'

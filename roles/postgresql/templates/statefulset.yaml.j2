@@ -96,6 +96,13 @@ spec:
           name: postgres-conf
           subPath: postgresql.conf
           readOnly: true
+{% if pg_extra_configuration_file %}
+        # Optional (extra) configuration
+        - mountPath: /etc/postgresql/extra.conf
+          name: postgres-extra-conf
+          subPath: extra.conf
+          readOnly: true
+{% endif %}
         # Persistent volume for data
         - mountPath: /var/lib/postgresql/data
           name: pg-pvc
@@ -140,6 +147,11 @@ spec:
       - name: postgres-conf
         configMap:
           name: postgres-conf
+{% if pg_extra_configuration_file %}
+      - name: postgres-extra-conf
+        configMap:
+          name: postgres-extra-conf
+{% endif %}
       - name: pg-pvc
         persistentVolumeClaim:
           claimName: pg

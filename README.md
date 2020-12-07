@@ -21,6 +21,10 @@ As with all of our playbooks you can find the common user-defined variables
 in the role's `defaults/main.yaml` and less common variables in
 `vars/main.yaml`.
 
+>   You will need a node in your cluster with the label
+    `informaticsmatters.com/purpose=core` as the Pod will require
+    this label during scheduling.
+
 ---
 
 [awx]: https://github.com/ansible/awx

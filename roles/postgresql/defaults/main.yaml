@@ -40,3 +40,11 @@ pg_aux_user: ''
 pg_aux_user_password: ''
 pg_aux_database: ''
 pg_aux_user_is_superuser: yes
+
+# An optional (additional) postgres configuration file.
+#
+# The default configuration file (which is defined in 'configmap-postgres-conf')
+# includes some important (built-in) values. If you require additional
+# parameters then you can provide your own postgres-compatible configuration
+# file and it will be 'included' when the database starts.
+pg_extra_configuration_file: ''

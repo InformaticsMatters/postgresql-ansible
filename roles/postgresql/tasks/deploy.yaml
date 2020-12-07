@@ -152,6 +152,22 @@
     wait_timeout: "{{ wait_timeout }}"
   when: pg_aux_user_fact|string|length > 0
 
+# Database extra config (if there's a configuration file) ---------------------
+
+- block:
+
+  - name: Read extra config from file
+    set_fact:
+      extra_config_fact: "{{ lookup('file', '{{ pg_extra_configuration_file }}') }}"
+
+  - name: Deploy extra config
+    k8s:
+      definition: "{{ lookup('template', 'configmap-postgres-extra-conf.yaml.j2') }}"
+      wait: yes
+      wait_timeout: "{{ wait_timeout }}"
+
+  when: pg_extra_configuration_file|string|length > 1
+
 # Database (postgres) ---------------------------------------------------------
 
 - name: Postgres
