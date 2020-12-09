@@ -25,6 +25,21 @@ in the role's `defaults/main.yaml` and less common variables in
     `informaticsmatters.com/purpose=core` as the Pod will require
     this label during scheduling.
 
+## Adding an auxiliary user
+As well as the 'standard' postgres user you can optionally also create
+a second (auxiliary) user with a database and optional super-user privileges
+using the `pg_aux` parameters (see `roles/postgresql/defaults/main.yaml`).
+
+## Fine-tuning postgres with an extra configuration file
+You can configure any additional database [parameters] using a postgres
+configuration file. An example is present in the root of this project
+(`postgres-extra.conf`).
+
+If you need a file, prepare it and then name it using the playbook's
+`pg_extra_configuration_file` parameter, which will be injected into the
+postgres **Pod** as a **ConfigMap** and processed by postgres as it starts.
+
 ---
 
 [awx]: https://github.com/ansible/awx
+[parameters]: https://www.postgresql.org/docs/12/config-setting.html

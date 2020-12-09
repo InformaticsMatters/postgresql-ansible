@@ -31,6 +31,7 @@ pg_user_password: "{{ lookup('password', '/dev/null length=8 chars=ascii_letters
 pg_database: postgres
 
 # An auxiliary user.
+#
 # If you set a user, set a password and database.
 # If set an 'init' configmap is written to the DB container
 # that is used to create the user and database.
