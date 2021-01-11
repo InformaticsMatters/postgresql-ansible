@@ -1,6 +1,7 @@
 # PostgreSQL Orchestration (Ansible)
 
-[![Build Status](https://travis-ci.com/InformaticsMatters/postgresql-ansible.svg?branch=master)](https://travis-ci.com/InformaticsMatters/postgresql-ansible)
+![lint](https://github.com/InformaticsMatters/postgresql-ansible/workflows/lint/badge.svg)
+
 ![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/informaticsmatters/postgresql-ansible)
 
 [![CodeFactor](https://www.codefactor.io/repository/github/informaticsmatters/postgresql-ansible/badge)](https://www.codefactor.io/repository/github/informaticsmatters/postgresql-ansible)

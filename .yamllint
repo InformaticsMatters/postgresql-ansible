@@ -8,5 +8,6 @@ rules:
   indentation: {spaces: 2, indent-sequences: false}
 
 ignore: |
+  .github/
   roles/postgresql/templates/statefulset.yaml.j2
   roles/postgresql/templates/configmap-postgres-init.yaml.j2
