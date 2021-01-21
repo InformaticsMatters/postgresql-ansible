@@ -9,5 +9,6 @@ rules:
 
 ignore: |
   .github/
+  roles/postgresql/templates/namespace.yaml.j2
   roles/postgresql/templates/statefulset.yaml.j2
   roles/postgresql/templates/configmap-postgres-init.yaml.j2

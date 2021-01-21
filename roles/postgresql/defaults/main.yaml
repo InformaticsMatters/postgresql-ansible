@@ -49,3 +49,10 @@ pg_aux_user_is_superuser: yes
 # parameters then you can provide your own postgres-compatible configuration
 # file and it will be 'included' when the database starts.
 pg_extra_configuration_file: ''
+
+# A pull-secret for public images pulled from DockerHub.
+# If set this is the base-64 string that can be used as the value
+# in our Kubernetes Secret as the .dockerconfigjson value.
+# If set it is applied to the ServiceAccount in the namespace
+# and applied to Pods that use that namespace.
+pg_dockerhub_pullsecret: ''

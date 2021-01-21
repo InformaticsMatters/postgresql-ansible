@@ -11,12 +11,25 @@
 
 # Create namespace
 
-- name: Creating namespace '{{ pg_namespace }}'
+- name: Create namespace ({{ pg_namespace }})
+  k8s:
+    definition: "{{ lookup('template', 'namespace.yaml.j2') }}"
+    wait: yes
+
+- name: Create DockerHub image pull secret
+  k8s:
+    definition: "{{ lookup('template', 'secret-dh-imagepull.yaml.j2') }}"
+    wait: yes
+  vars:
+    pull_namespace: "{{ pg_namespace }}"
+    pull_secret: "{{ pg_dockerhub_pullsecret }}"
+  when: pg_dockerhub_pullsecret|string|length > 0
+
+- name: Creating namespace material
   k8s:
     definition: "{{ lookup('template', '{{ item }}.yaml.j2') }}"
     wait: yes
   loop:
-  - namespace
   - serviceaccount
   - role-im-psp-unrestricted
   - rolebinding-pg-sa
