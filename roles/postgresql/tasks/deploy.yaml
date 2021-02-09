@@ -94,6 +94,7 @@
     definition: "{{ lookup('template', 'pvc-pg.yaml.j2') }}"
     wait: yes
     wait_timeout: "{{ wait_timeout }}"
+  when: pg_vol_size_g|int > 0
 
 # Best practice ... wait for the PVC to bind.
 # e.g. wait until resources[0].status.phase == Bound (initially Pending)
@@ -111,7 +112,9 @@
     and pg_pvc_result.resources[0].status.phase == 'Bound'
   delay: 5
   retries: "{{ (bind_timeout|int / 5)|int }}"
-  when: wait_for_bind|bool
+  when:
+  - pg_vol_size_g|int > 0
+  - wait_for_bind|bool
 
 # Database volume (pg-copy) ---------------------------------------------------
 
