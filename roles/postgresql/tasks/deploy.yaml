@@ -170,7 +170,8 @@
 
 # Database extra config (if there's a configuration file) ---------------------
 
-- block:
+- name: Extra configuration
+  block:
 
   - name: Read extra config from file
     set_fact:
@@ -195,3 +196,19 @@
   - configmap-postgres-conf
   - service
   - statefulset
+
+- name: Wait for Postgres Pod
+  k8s_info:
+    kind: Pod
+    namespace: "{{ pg_namespace }}"
+    label_selectors:
+    - app=postgres
+  register: result
+  until: >-
+    result.resources|length > 0
+    and result.resources[0].status.containerStatuses is defined
+    and result.resources[0].status.containerStatuses|length == 1
+    and result.resources[0].status.containerStatuses[0].ready is defined
+    and result.resources[0].status.containerStatuses[0].ready
+  delay: 20
+  retries: "{{ (wait_timeout|int / 20)|int }}"
