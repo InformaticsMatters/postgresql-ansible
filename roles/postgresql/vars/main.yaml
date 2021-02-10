@@ -21,6 +21,11 @@ pg_image_version: '12.2'
 # in the chosen namespace and provide the name of it in this variable.
 all_image_preset_pullsecret_name: ''
 
+# Use the built-in node affinity?
+# Usually requiring a core node,
+# but not if we set this to False
+pg_enable_affinity: yes
+
 # CPU and Memory requests and limits
 pg_cpu_request: 250m
 pg_cpu_limit: 500m

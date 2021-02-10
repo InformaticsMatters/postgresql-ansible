@@ -18,6 +18,7 @@ spec:
     spec:
       serviceAccountName: postgres
 
+{% if pg_enable_affinity %}
       # We must have a 'core' node
       affinity:
         nodeAffinity:
@@ -28,6 +29,7 @@ spec:
                 operator: In
                 values:
                 - core
+{% endif %}
 
 {% if all_image_preset_pullsecret_name|string|length > 0 %}
       imagePullSecrets:
@@ -83,6 +85,10 @@ spec:
             - "-c"
             - pg_isready -h 127.0.0.1 -p 5432 -U {{ pg_user }} -q
         volumeMounts:
+        # Container shared-memory work-around.
+        # See https://github.com/kubernetes/kubernetes/issues/28272
+        - mountPath: /dev/shm
+          name: dshm
         # Postgres configuration
         - mountPath: /etc/postgresql/postgresql.conf
           name: postgres-conf
@@ -147,6 +153,9 @@ spec:
       - name: postgres-conf
         configMap:
           name: postgres-conf
+      - name: dshm
+        emptyDir:
+          medium: Memory
 
 {% if pg_extra_configuration_file %}
       - name: postgres-extra-conf
