@@ -118,7 +118,8 @@
 
 # Database volume (pg-copy) ---------------------------------------------------
 
-- block:
+- name: Create PGCOPY volume
+  block:
 
   - name: Get {{ pg_copy_vol_storageclass }} StorageClass
     k8s_info:
@@ -159,32 +160,6 @@
 
   when: pg_copy_vol_size_g|int > 0
 
-# Database init (if there's an aux user) --------------------------------------
-
-- name: Postgres init
-  k8s:
-    definition: "{{ lookup('template', 'configmap-postgres-init.yaml.j2') }}"
-    wait: yes
-    wait_timeout: "{{ wait_timeout }}"
-  when: pg_aux_user_fact|string|length > 0
-
-# Database extra config (if there's a configuration file) ---------------------
-
-- name: Extra configuration
-  block:
-
-  - name: Read extra config from file
-    set_fact:
-      extra_config_fact: "{{ lookup('file', '{{ pg_extra_configuration_file }}') }}"
-
-  - name: Deploy extra config
-    k8s:
-      definition: "{{ lookup('template', 'configmap-postgres-extra-conf.yaml.j2') }}"
-      wait: yes
-      wait_timeout: "{{ wait_timeout }}"
-
-  when: pg_extra_configuration_file|string|length > 1
-
 # Database (postgres) ---------------------------------------------------------
 
 - name: Postgres
@@ -194,10 +169,11 @@
     wait_timeout: "{{ wait_timeout }}"
   loop:
   - configmap-postgres-conf
+  - configmap-postgres-init
   - service
   - statefulset
 
-- name: Wait for Postgres Pod
+- name: Wait for Postgres
   k8s_info:
     kind: Pod
     namespace: "{{ pg_namespace }}"

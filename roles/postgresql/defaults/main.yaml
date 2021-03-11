@@ -48,13 +48,13 @@ pg_aux_user_password: ''
 pg_aux_database: ''
 pg_aux_user_is_superuser: yes
 
-# An optional (additional) postgres configuration file.
+# The postgres configuration file.
 #
-# The default configuration file (which is defined in 'configmap-postgres-conf')
-# includes some important (built-in) values. If you require additional
-# parameters then you can provide your own postgres-compatible configuration
-# file and it will be 'included' when the database starts.
-pg_extra_configuration_file: ''
+# What is placed here is written to the container as '/tmp/postgresql.conf',
+# which is then copied to 'PGDATA/postgresql.conf' at run-time
+# by our initialisation script '01-init.sh'.
+pg_configuration: |
+  listen_addresses = '*'
 
 # A pull-secret for public images pulled from DockerHub.
 # If set this is the base-64 string that can be used as the value

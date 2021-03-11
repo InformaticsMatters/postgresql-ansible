@@ -5,6 +5,4 @@ metadata:
   name: postgres-conf
   namespace: {{ pg_namespace }}
 data:
-  postgresql.conf: |
-    listen_addresses = '*'
-    include_if_exists 'extra.conf'
+  postgresql.conf: "{{ pg_configuration|replace('\n', '\\n') }}"

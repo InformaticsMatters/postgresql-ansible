@@ -8,6 +8,12 @@ data:
   01-init.sh: |
     #!/bin/bash
     set -e
+
+    # Copy configuration into place
+    cat /tmp/postgresql.conf > /var/lib/postgresql/data/postgresql.conf
+
+{% if pg_aux_user_fact %}
+    # Configure aux user
     psql -v ON_ERROR_STOP=1 --username "{{ pg_user_fact }}" --dbname "{{ pg_database_fact }}" <<-EOSQL
         -- Configure a user and database for the additional (auxiliary) user
         CREATE USER {{ pg_aux_user_fact }};
@@ -18,3 +24,4 @@ data:
         ALTER USER {{ pg_aux_user_fact }} WITH SUPERUSER;
 {% endif %}
     EOSQL
+{% endif %}

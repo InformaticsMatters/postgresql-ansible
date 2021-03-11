@@ -94,21 +94,17 @@ spec:
           name: postgres-conf
           subPath: postgresql.conf
           readOnly: true
-{% if pg_extra_configuration_file %}
-        # Optional (extra) configuration
-        - mountPath: /etc/postgresql/extra.conf
-          name: postgres-extra-conf
-          subPath: extra.conf
+        # Configuration file
+        # (copied into place by the initialisation script)
+        - mountPath: /tmp/postgresql.conf
+          name: postgres-conf
+          subPath: postgresql.conf
           readOnly: true
-{% endif %}
-{% if pg_aux_user_fact %}
-        # Database initialisation scripts
-        # It's here we create additional - 'out-of-the-box' users and databases
+        # Database initialisation script
         - mountPath: /docker-entrypoint-initdb.d/01-init.sh
           name: postgres-init
           subPath: 01-init.sh
           readOnly: true
-{% endif %}
         # Persistent volume for data
         - mountPath: /var/lib/postgresql/data
           name: pgdata
@@ -156,18 +152,9 @@ spec:
       - name: dshm
         emptyDir:
           medium: Memory
-
-{% if pg_extra_configuration_file %}
-      - name: postgres-extra-conf
-        configMap:
-          name: postgres-extra-conf
-{% endif %}
-
-{% if pg_aux_user_fact %}
       - name: postgres-init
         configMap:
           name: postgres-init
-{% endif %}
 
       # The database volume.
       # A claim if the volume has a size,
