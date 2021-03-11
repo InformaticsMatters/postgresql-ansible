@@ -23,3 +23,7 @@ pg_copy_vol_storageclass: efs
 pg_aux_user: frag
 pg_aux_user_password: blob1234
 pg_aux_database: frag
+
+pg_configuration: |
+  listen_addresses = '*'
+  shared_buffers = 512MB

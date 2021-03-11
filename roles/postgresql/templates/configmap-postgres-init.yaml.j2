@@ -10,7 +10,7 @@ data:
     set -e
 
     # Copy configuration into place
-    cat /tmp/postgresql.conf > /var/lib/postgresql/data/postgresql.conf
+    cat /tmp/postgresql.conf > $PGDATA/postgresql.conf
 
 {% if pg_aux_user_fact %}
     # Configure aux user

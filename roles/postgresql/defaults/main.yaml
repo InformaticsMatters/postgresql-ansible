@@ -53,6 +53,22 @@ pg_aux_user_is_superuser: yes
 # What is placed here is written to the container as '/tmp/postgresql.conf',
 # which is then copied to 'PGDATA/postgresql.conf' at run-time
 # by our initialisation script '01-init.sh'.
+#
+# The pg_configuration can be used to set any postgres configuration
+# parameter: -
+#
+#   pg_configuration: |
+#     listen_addresses = '*'
+#     autovacuum_max_workers = 2
+#     logging_collector = true
+#     log_min_messages = notice
+#     max_worker_processes = 2
+#     max_parallel_workers = 2
+#     max_parallel_workers_per_gather = 2
+#     max_wal_size = 1GB
+#     shared_buffers = 128kB
+#     synchronous_commit = off
+#     work_mem = 4MB
 pg_configuration: |
   listen_addresses = '*'
 
