@@ -59,9 +59,9 @@
     pg_user_fact: "{{ pg_s_result.resources[0].data.database_admin_user|b64decode }}"
     pg_user_password_fact: "{{ pg_s_result.resources[0].data.database_admin_user_password|b64decode }}"
     pg_database_fact: "{{ pg_s_result.resources[0].data.database_name|b64decode }}"
-    pg_aux_user_fact: "{{ pg_s_result.resources[0].data.database_aux_user }}"
-    pg_aux_user_password_fact: "{{ pg_s_result.resources[0].data.database_aux_user_password }}"
-    pg_aux_database_fact: "{{ pg_s_result.resources[0].data.database_aux_database }}"
+    pg_aux_user_fact: "{{ pg_s_result.resources[0].data.database_aux_user|b64decode }}"
+    pg_aux_user_password_fact: "{{ pg_s_result.resources[0].data.database_aux_user_password|b64decode }}"
+    pg_aux_database_fact: "{{ pg_s_result.resources[0].data.database_aux_database|b64decode }}"
   when: pg_s_result.resources|length == 1
 
 - name: Write Database secrets
