@@ -6,8 +6,7 @@
 
 [![CodeFactor](https://www.codefactor.io/repository/github/informaticsmatters/postgresql-ansible/badge)](https://www.codefactor.io/repository/github/informaticsmatters/postgresql-ansible)
 
-A playbook and Role to deploy PosgreSQL, suitable for execution by
-[AWX].
+A playbook and role to deploy PostgreSQL, designed for execution by [AWX].
 
 This project contains one Ansible role:-
 
@@ -22,9 +21,9 @@ As with all of our playbooks you can find the common user-defined variables
 in the role's `defaults/main.yaml` and less common variables in
 `vars/main.yaml`.
 
->   You will need a node in your cluster with the label
-    `informaticsmatters.com/purpose=core` as the Pod will require
-    this label during scheduling.
+>   If you set `pg_enable_affinity` you will need a node in your cluster with the label
+    `informaticsmatters.com/purpose-core` as the PostgreSQL Kubernetes Pod
+    affinity  will require this label during scheduling.
 
 ## Adding an auxiliary user
 As well as the 'standard' postgres user you can optionally also create
