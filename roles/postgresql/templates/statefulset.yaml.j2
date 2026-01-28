@@ -25,13 +25,11 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: informaticsmatters.com/purpose
-                operator: In
-                values:
-                - core
+              - key: informaticsmatters.com/purpose-core
+                operator: Exists
 {% endif %}
 
-{% if all_image_preset_pullsecret_name|string|length > 0 %}
+{% if all_image_preset_pullsecret_name | string | length > 0 %}
       imagePullSecrets:
       - name: {{ all_image_preset_pullsecret_name }}
 {% endif %}

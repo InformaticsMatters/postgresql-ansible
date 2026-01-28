@@ -17,7 +17,7 @@ pg_vol_size_g: 50
 # The StorageClass of the postgres persistent volume.
 # A blank class implied the cluster default.
 # Unused if 'pg_vol_size_g' is '0'
-pg_vol_storageclass: " "
+pg_vol_storageclass: ' '
 
 # The volume size (Gi) of a separate 'pgcopy' volume.
 # The volume is mounted into the database container
@@ -29,11 +29,11 @@ pg_vol_storageclass: " "
 pg_copy_vol_size_g: 0
 # The StorageClass of the persistent volume.
 # A blank class implied the cluster default.
-pg_copy_vol_storageclass: " "
+pg_copy_vol_storageclass: ' '
 
 # Root-user variables
 pg_user: postgres
-pg_user_password: "{{ lookup('password', '/dev/null length=8 chars=ascii_letters,digits') }}"
+pg_user_password: "{{ lookup('password', '/dev/null length=14 chars=ascii_letters,digits') }}"
 pg_database: postgres
 
 # An auxiliary user.

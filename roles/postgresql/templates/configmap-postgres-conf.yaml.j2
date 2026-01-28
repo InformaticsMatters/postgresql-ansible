@@ -5,4 +5,4 @@ metadata:
   name: postgres-conf
   namespace: {{ pg_namespace }}
 data:
-  postgresql.conf: "{{ pg_configuration|replace('\n', '\\n') }}"
+  postgresql.conf: "{{ pg_configuration | replace('\n', '\\n') }}"
